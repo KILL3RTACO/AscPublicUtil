@@ -288,7 +288,6 @@ Pathfinder.Grid = class Grid
     throw new Error("list must be an array") if not Array.isArray(list)
     found = []
     for {x, y} in list
-      continue if x < 0 or x >= @__width or y < 0 or y >= @__height
       n = @get x, y
       continue if n is null or n is undefined
       found.push n
@@ -299,7 +298,9 @@ Pathfinder.Grid = class Grid
     return null if node is null or node is undefined
     return @getNodes node.getAllowedNeighbors()
 
-  get: (x, y) -> return @__grid[getIndex x, y, @__width]
+  get: (x, y) ->
+    return null if x < 0 or x >= @__width or y < 0 or y >= @__height
+    return @__grid[getIndex x, y, @__width]
   set: (x, y, node) ->
     @__grid[getIndex x, y, @__width] = node
     return @

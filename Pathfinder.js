@@ -389,9 +389,6 @@
       found = [];
       for (i = 0, len = list.length; i < len; i++) {
         ref = list[i], x = ref.x, y = ref.y;
-        if (x < 0 || x >= this.__width || y < 0 || y >= this.__height) {
-          continue;
-        }
         n = this.get(x, y);
         if (n === null || n === void 0) {
           continue;
@@ -411,6 +408,9 @@
     };
 
     Grid.prototype.get = function(x, y) {
+      if (x < 0 || x >= this.__width || y < 0 || y >= this.__height) {
+        return null;
+      }
       return this.__grid[getIndex(x, y, this.__width)];
     };
 
