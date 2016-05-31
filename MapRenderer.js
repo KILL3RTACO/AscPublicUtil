@@ -130,7 +130,7 @@
       }
     };
 
-    MapRenderer.prototype.colorMarkerker = function(x, y, color, style) {
+    MapRenderer.prototype.colorMarker = function(x, y, color, style) {
       return this.colorMakerRaw(x, y, this.getColor(color), style);
     };
 
@@ -233,11 +233,11 @@
       return this.__cellSize;
     };
 
-    MapRenderer.prototype.drawPath = function(path, color, style) {
+    MapRenderer.prototype.colorPath = function(path, color, style) {
       return drawPathRaw(path, this.getColor(color), style);
     };
 
-    MapRenderer.prototype.drawPathRaw = function(path, color) {
+    MapRenderer.prototype.colorPathRaw = function(path, color) {
       var i, len, prev, ref, x, y;
       if (path === null || path.length < 2) {
         return;

@@ -80,7 +80,7 @@ class MapRenderer
     else
       @colorBorderRaw x, y, color, d for d in [@constructor.TOP, @constructor.LEFT, @constructor.RIGHT, @constructor.BOTTOM]
 
-  colorMarkerker: (x, y, color, style) -> @colorMakerRaw x, y, @getColor(color), style
+  colorMarker: (x, y, color, style) -> @colorMakerRaw x, y, @getColor(color), style
   colorMarkerRaw: (x, y, color, style) ->
     ox = @getOffset x
     oy = @getOffset y
@@ -159,12 +159,12 @@ class MapRenderer
 
   setCellSize: (size) ->
     @__cellSize = if Number.isInteger(size) and size > 0 then size else 1
-    @__updateSize() 
+    @__updateSize()
     return @
   getCellSize: -> return @__cellSize
 
-  drawPath: (path, color, style) -> drawPathRaw path, @getColor(color), style
-  drawPathRaw: (path, color) ->
+  colorPath: (path, color, style) -> drawPathRaw path, @getColor(color), style
+  colorPathRaw: (path, color) ->
     return if path is null or path.length < 2
     @__ctx.strokeStyle = color
     @__ctx.beginPath()
