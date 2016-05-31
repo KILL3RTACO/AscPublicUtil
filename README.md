@@ -31,7 +31,7 @@ Pathfinder is an [A* pathfinding](//wikipedia.org/wiki/A*_search_algorithm) util
 * I wanted the challenege of doing it myself.
 * I've yet to find anything that explains *in depth* how A* works, hence the 'challenge' bullet above. In my implementation I explain everything line-by-line, so if you're new to pathfinding, or game programming in general, try looking at the source (CoffeeScript source is found in the [src](./src) folder, and the transpiled JavaScript is in this folder).
 
-## Features
+## <a name='PathfinderFeatures'></a> Features
 * Everything that the A* algorithm requires (a Graph and Nodes)
   * Graphs are called Grids in Pathfinder because I thought the name fit better
 * You can define which directions a node is allowed to travel. (I will refer to this as allowed neighbor movement)
@@ -39,7 +39,7 @@ Pathfinder is an [A* pathfinding](//wikipedia.org/wiki/A*_search_algorithm) util
 * You can tell Pathfinder what movement cost is considered 'impossible'
   * If a Node's movement cost and the total cost of travel is >= to this value, Pathfinder will ignore the node
 * You can tell Pathfinder which distance/heuristic formula to use. There are currently 3 available:
-  * MANHATTAN - (default) [Manhattan distance](//wikipedia.org/wiki/Taxicab_geometry) (also called Taxicab) is used. Adjacent movement (up, down, left, right) has a cost of 1 and diagonal movement has an (implicit, because math) cost of 2. 
+  * MANHATTAN - (default) [Manhattan distance](//wikipedia.org/wiki/Taxicab_geometry) (also called Taxicab) is used. Adjacent movement (up, down, left, right) has a cost of 1 and diagonal movement has an (implicit, because math) cost of 2.
   * OCTILE - Octile distance is used (adjacent movement has a cost of 1 and diagonal movement has a cost of sqrt(2) (approximated to 1.4))
   * CHEBYSHEV - Adjacent and diagonal movement have the same cost (1)
-  * You can also supply a custom function in the form of (a, b) to be used. 
+  * You can also supply a custom function in the form of (a, b) to be used.
