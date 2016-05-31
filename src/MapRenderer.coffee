@@ -63,11 +63,14 @@ class MapRenderer
 
   color: (x, y, color) -> @colorRaw x, y, @__colors.getColor color
   colorRaw: (x, y, color) ->
+    @__ctx.save()
     @__ctx.fillStyle = color
     @__ctx.fillRect @getOffset(x), @getOffset(y), @__cellSize, @__cellSize
+    @__ctx.restore()
 
   colorBorder: (x, y, color, direction) -> @colorBorderRaw x, y, @__colors.getColor(color), direction
   colorBorderRaw: (x, y, color, direction) ->
+    @__ctx.save()
     @__ctx.fillStyle = color
     if direction is @constructor.TOP
       @__ctx.fillRect @getOffset(x) - @__borderSize, @getOffset(y) - @__borderSize, @__cellSize + (@__borderSize * 2), @__borderSize
@@ -79,6 +82,7 @@ class MapRenderer
       @__ctx.fillRect @getOffset(x) + @__cellSize, @getOffset(y) - @__borderSize, @__borderSize, @__cellSize + (@__borderSize * 2)
     else
       @colorBorderRaw x, y, color, d for d in [@constructor.TOP, @constructor.LEFT, @constructor.RIGHT, @constructor.BOTTOM]
+    @__ctx.restore()
 
   colorMarker: (x, y, color, style) -> @colorMakerRaw x, y, @getColor(color), style
   colorMarkerRaw: (x, y, color, style) ->
@@ -95,6 +99,7 @@ class MapRenderer
     right = (ox + @__cellSize) - om
     bottom = (oy + @__cellSize) - om
 
+    @__ctx.save()
     @__ctx.fillStyle = color
     triEq = style is @constructor.TRIANGLE_UP_EQ or
             style is @constructor.TRIANGLE_LEFT_EQ or
@@ -144,6 +149,7 @@ class MapRenderer
       @__ctx.fill()
     else # SQUARE
       @__ctx.fillRect ox + om, oy + om, size, size
+    @__ctx.restore()
 
   setBorderSize: (size) ->
     @__borderSize = if Number.isInteger(size) and size > 0 then size else 1
@@ -160,9 +166,10 @@ class MapRenderer
     return @
   getCellSize: -> return @__cellSize
 
-  colorPath: (path, color, style) -> drawPathRaw path, @getColor(color), style
+  colorPath: (path, color) -> drawPathRaw path, @getColor(color)
   colorPathRaw: (path, color) ->
     return if path is null or path.length < 2
+    @__ctx.save()
     @__ctx.strokeStyle = color
     @__ctx.beginPath()
     prev = null
@@ -176,6 +183,7 @@ class MapRenderer
     @__ctx.lineTo prev.x, prev.y
     @__ctx.stroke()
     @__ctx.closePath()
+    @__ctx.restore()
 
   getCellLocation: (pixelX, pixelY) ->
     return {

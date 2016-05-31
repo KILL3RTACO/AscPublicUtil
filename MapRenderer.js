@@ -100,8 +100,10 @@
     };
 
     MapRenderer.prototype.colorRaw = function(x, y, color) {
+      this.__ctx.save();
       this.__ctx.fillStyle = color;
-      return this.__ctx.fillRect(this.getOffset(x), this.getOffset(y), this.__cellSize, this.__cellSize);
+      this.__ctx.fillRect(this.getOffset(x), this.getOffset(y), this.__cellSize, this.__cellSize);
+      return this.__ctx.restore();
     };
 
     MapRenderer.prototype.colorBorder = function(x, y, color, direction) {
@@ -109,25 +111,25 @@
     };
 
     MapRenderer.prototype.colorBorderRaw = function(x, y, color, direction) {
-      var d, i, len, ref, results;
+      var d, i, len, ref;
+      this.__ctx.save();
       this.__ctx.fillStyle = color;
       if (direction === this.constructor.TOP) {
-        return this.__ctx.fillRect(this.getOffset(x) - this.__borderSize, this.getOffset(y) - this.__borderSize, this.__cellSize + (this.__borderSize * 2), this.__borderSize);
+        this.__ctx.fillRect(this.getOffset(x) - this.__borderSize, this.getOffset(y) - this.__borderSize, this.__cellSize + (this.__borderSize * 2), this.__borderSize);
       } else if (direction === this.constructor.LEFT) {
-        return this.__ctx.fillRect(this.getOffset(x) - this.__borderSize, this.getOffset(y) - this.__borderSize, this.__borderSize, this.__cellSize + (this.__borderSize * 2));
+        this.__ctx.fillRect(this.getOffset(x) - this.__borderSize, this.getOffset(y) - this.__borderSize, this.__borderSize, this.__cellSize + (this.__borderSize * 2));
       } else if (direction === this.constructor.BOTTOM) {
-        return this.__ctx.fillRect(this.getOffset(x) - this.__borderSize, this.getOffset(y) + this.__cellSize, this.__cellSize + (this.__borderSize * 2), this.__borderSize);
+        this.__ctx.fillRect(this.getOffset(x) - this.__borderSize, this.getOffset(y) + this.__cellSize, this.__cellSize + (this.__borderSize * 2), this.__borderSize);
       } else if (direction === this.constructor.RIGHT) {
-        return this.__ctx.fillRect(this.getOffset(x) + this.__cellSize, this.getOffset(y) - this.__borderSize, this.__borderSize, this.__cellSize + (this.__borderSize * 2));
+        this.__ctx.fillRect(this.getOffset(x) + this.__cellSize, this.getOffset(y) - this.__borderSize, this.__borderSize, this.__cellSize + (this.__borderSize * 2));
       } else {
         ref = [this.constructor.TOP, this.constructor.LEFT, this.constructor.RIGHT, this.constructor.BOTTOM];
-        results = [];
         for (i = 0, len = ref.length; i < len; i++) {
           d = ref[i];
-          results.push(this.colorBorderRaw(x, y, color, d));
+          this.colorBorderRaw(x, y, color, d);
         }
-        return results;
       }
+      return this.__ctx.restore();
     };
 
     MapRenderer.prototype.colorMarker = function(x, y, color, style) {
@@ -146,6 +148,7 @@
       midY = oy + size;
       right = (ox + this.__cellSize) - om;
       bottom = (oy + this.__cellSize) - om;
+      this.__ctx.save();
       this.__ctx.fillStyle = color;
       triEq = style === this.constructor.TRIANGLE_UP_EQ || style === this.constructor.TRIANGLE_LEFT_EQ || style === this.constructor.TRIANGLE_RIGHT_EQ || style === this.constructor.TRIANGLE_DOWN_EQ;
       triMod = (triEq ? om / 2 : 0);
@@ -153,7 +156,7 @@
         this.__ctx.beginPath();
         this.__ctx.arc(midX, midY, om, 0, 2 * Math.PI);
         this.__ctx.closePath();
-        return this.__ctx.fill();
+        this.__ctx.fill();
       } else if (style === this.constructor.DIAMOND) {
         this.__ctx.beginPath();
         this.__ctx.moveTo(left, midY);
@@ -161,38 +164,39 @@
         this.__ctx.lineTo(right, midY);
         this.__ctx.lineTo(midX, bottom);
         this.__ctx.closePath();
-        return this.__ctx.fill();
+        this.__ctx.fill();
       } else if (style === this.constructor.TRIANGLE_UP || style === this.constructor.TRIANGLE_UP_EQ) {
         this.__ctx.beginPath();
         this.__ctx.moveTo(left, bottom - triMod);
         this.__ctx.lineTo(midX, top + triMod);
         this.__ctx.lineTo(right, bottom - triMod);
         this.__ctx.closePath();
-        return this.__ctx.fill();
+        this.__ctx.fill();
       } else if (style === this.constructor.TRIANGLE_LEFT || style === this.constructor.TRIANGLE_LEFT_EQ) {
         this.__ctx.beginPath();
         this.__ctx.moveTo(left + triMod, midY);
         this.__ctx.lineTo(right - triMod, top);
         this.__ctx.lineTo(right - triMod, bottom);
         this.__ctx.closePath();
-        return this.__ctx.fill();
+        this.__ctx.fill();
       } else if (style === this.constructor.TRIANGLE_RIGHT || style === this.constructor.TRIANGLE_RIGHT_EQ) {
         this.__ctx.beginPath();
         this.__ctx.moveTo(left + triMod, top);
         this.__ctx.lineTo(right - triMod, midY);
         this.__ctx.lineTo(left + triMod, bottom);
         this.__ctx.closePath();
-        return this.__ctx.fill();
+        this.__ctx.fill();
       } else if (style === this.constructor.TRIANGLE_DOWN || style === this.constructor.TRIANGLE_DOWN_EQ) {
         this.__ctx.beginPath();
         this.__ctx.moveTo(left, top + triMod);
         this.__ctx.lineTo(right, top + triMod);
         this.__ctx.lineTo(midX, bottom - triMod);
         this.__ctx.closePath();
-        return this.__ctx.fill();
+        this.__ctx.fill();
       } else {
-        return this.__ctx.fillRect(ox + om, oy + om, size, size);
+        this.__ctx.fillRect(ox + om, oy + om, size, size);
       }
+      return this.__ctx.restore();
     };
 
     MapRenderer.prototype.setBorderSize = function(size) {
@@ -224,8 +228,8 @@
       return this.__cellSize;
     };
 
-    MapRenderer.prototype.colorPath = function(path, color, style) {
-      return drawPathRaw(path, this.getColor(color), style);
+    MapRenderer.prototype.colorPath = function(path, color) {
+      return drawPathRaw(path, this.getColor(color));
     };
 
     MapRenderer.prototype.colorPathRaw = function(path, color) {
@@ -233,6 +237,7 @@
       if (path === null || path.length < 2) {
         return;
       }
+      this.__ctx.save();
       this.__ctx.strokeStyle = color;
       this.__ctx.beginPath();
       prev = null;
@@ -248,7 +253,8 @@
       }
       this.__ctx.lineTo(prev.x, prev.y);
       this.__ctx.stroke();
-      return this.__ctx.closePath();
+      this.__ctx.closePath();
+      return this.__ctx.restore();
     };
 
     MapRenderer.prototype.getCellLocation = function(pixelX, pixelY) {
