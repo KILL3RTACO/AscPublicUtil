@@ -31,6 +31,10 @@ class MapRenderer
     @__borderColor = "#000"
     @__colors = []
 
+  __updateSize: ->
+    @__ctx.canvas.width = @getOffset floor.getWidth()
+    @__ctx.canvas.height = @getOffset floor.getHeight()
+
   setVoidColor: (@__voidColor) -> return @
   getVoidColor: -> @__voidColor
 
@@ -53,6 +57,7 @@ class MapRenderer
 
   setCanvas: (canvas) ->
     @__ctx = canvas.getContext("2d")
+    @__updateSize()
     return @
   getContext: -> @__ctx
 
@@ -142,6 +147,7 @@ class MapRenderer
 
   setBorderSize: (size) ->
     @__borderSize = if Number.isInteger(size) and size > 0 then size else 1
+    @__updateSize()
     return @
   getBorderSize: -> @__borderSize
 
@@ -153,6 +159,7 @@ class MapRenderer
 
   setCellSize: (size) ->
     @__cellSize = if Number.isInteger(size) and size > 0 then size else 1
+    @__updateSize() 
     return @
   getCellSize: -> return @__cellSize
 

@@ -41,6 +41,11 @@
       this.__colors = [];
     }
 
+    MapRenderer.prototype.__updateSize = function() {
+      this.__ctx.canvas.width = this.getOffset(floor.getWidth());
+      return this.__ctx.canvas.height = this.getOffset(floor.getHeight());
+    };
+
     MapRenderer.prototype.setVoidColor = function(__voidColor) {
       this.__voidColor = __voidColor;
       return this;
@@ -82,6 +87,7 @@
 
     MapRenderer.prototype.setCanvas = function(canvas) {
       this.__ctx = canvas.getContext("2d");
+      this.__updateSize();
       return this;
     };
 
@@ -191,6 +197,7 @@
 
     MapRenderer.prototype.setBorderSize = function(size) {
       this.__borderSize = Number.isInteger(size) && size > 0 ? size : 1;
+      this.__updateSize();
       return this;
     };
 
@@ -218,6 +225,7 @@
 
     MapRenderer.prototype.setCellSize = function(size) {
       this.__cellSize = Number.isInteger(size) && size > 0 ? size : 1;
+      this.__updateSize();
       return this;
     };
 
