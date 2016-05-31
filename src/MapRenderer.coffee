@@ -154,9 +154,6 @@ class MapRenderer
   setBorderColor: (@__borderColor) -> return @
   getBorderColor: -> @__borderColor
 
-  setInactiveBorderColor: (@__inactiveBorderColor) -> return @
-  getInactiveBorderColor: -> @__inactiveBorderColor
-
   setCellSize: (size) ->
     @__cellSize = if Number.isInteger(size) and size > 0 then size else 1
     @__updateSize()
@@ -189,4 +186,4 @@ class MapRenderer
 if typeof module is "object" and typeof module.exports is "object"
   module.exports = MapRenderer
 else
-  window.Pathfinder = MapRenderer
+  window.MapRenderer = MapRenderer

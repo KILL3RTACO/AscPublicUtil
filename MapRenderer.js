@@ -214,15 +214,6 @@
       return this.__borderColor;
     };
 
-    MapRenderer.prototype.setInactiveBorderColor = function(__inactiveBorderColor) {
-      this.__inactiveBorderColor = __inactiveBorderColor;
-      return this;
-    };
-
-    MapRenderer.prototype.getInactiveBorderColor = function() {
-      return this.__inactiveBorderColor;
-    };
-
     MapRenderer.prototype.setCellSize = function(size) {
       this.__cellSize = Number.isInteger(size) && size > 0 ? size : 1;
       this.__updateSize();
@@ -274,7 +265,7 @@
   if (typeof module === "object" && typeof module.exports === "object") {
     module.exports = MapRenderer;
   } else {
-    window.Pathfinder = MapRenderer;
+    window.MapRenderer = MapRenderer;
   }
 
 }).call(this);
