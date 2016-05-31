@@ -27,7 +27,7 @@ This is a simple JavaScript utility to generate a cell based map (i.e. game of l
 
 # <a name='Pathfinder'></a> Pathfinder
 Pathfinder is an [A* pathfinding](//wikipedia.org/wiki/A*_search_algorithm) utility. I created it for a few reasons:
-* I needed a pathfinding utility, every one I've found/seen didn't quite fit what I wanted (see [Features](#PathfinderFeatures)).
+* I needed a pathfinding utility, every one I've found/seen didn't quite fit what I wanted (see Features).
 * I wanted the challenege of doing it myself.
 * I've yet to find anything that explains *in depth* how A* works, hence the 'challenge' bullet above. In my implementation I explain everything line-by-line, so if you're new to pathfinding, or game programming in general, try looking at the source (CoffeeScript source is found in the [src](./src) folder, and the transpiled JavaScript is in this folder).
 
