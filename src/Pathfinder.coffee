@@ -208,15 +208,16 @@ class Pathfinder
 # Represents a square in a grid
 Pathfinder.Node = class Node
 
-  @WALL:        -1
-  @UP:           0
-  @DOWN:         1
-  @LEFT:         2
-  @RIGHT:        3
-  @TOP_LEFT:     4
-  @TOP_RIGHT:    5
-  @BOTTOM_LEFT:  6
-  @BOTTOM_RIGHT: 7
+  @WALL:          -1
+  @UP:             0
+  @DOWN:           1
+  @LEFT:           2
+  @RIGHT:          3
+  @TOP_LEFT:       4
+  @TOP_RIGHT:      5
+  @BOTTOM_LEFT:    6
+  @BOTTOM_RIGHT:   7
+  @ALL_DIRECTIONS: [@UP..@BOTTOM_RIGHT]
 
   @defaultOptions: ->
     options = {
@@ -279,7 +280,7 @@ Pathfinder.Node = class Node
 
 Pathfinder.Grid = class Grid
 
-  constructor: (@__grid, @__width, @__height) ->
+  constructor: (@__grid, @__width = 10, @__height = 10) ->
 
   getHeight: -> @__height
   getWidth: -> @__width

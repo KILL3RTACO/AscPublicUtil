@@ -168,6 +168,8 @@
   })();
 
   Pathfinder.Node = Node = (function() {
+    var i, ref, ref1, results;
+
     Node.WALL = -1;
 
     Node.UP = 0;
@@ -186,15 +188,21 @@
 
     Node.BOTTOM_RIGHT = 7;
 
+    Node.ALL_DIRECTIONS = (function() {
+      results = [];
+      for (var i = ref = Node.UP, ref1 = Node.BOTTOM_RIGHT; ref <= ref1 ? i <= ref1 : i >= ref1; ref <= ref1 ? i++ : i--){ results.push(i); }
+      return results;
+    }).apply(this);
+
     Node.defaultOptions = function() {
-      var i, k, len, options, ref;
+      var j, k, len, options, ref2;
       options = {
         x: 0,
         y: 0
       };
-      ref = ["up", "down", "left", "right", "topLeft", "topRight", "bottomLeft", "bottomRight"];
-      for (i = 0, len = ref.length; i < len; i++) {
-        k = ref[i];
+      ref2 = ["up", "down", "left", "right", "topLeft", "topRight", "bottomLeft", "bottomRight"];
+      for (j = 0, len = ref2.length; j < len; j++) {
+        k = ref2[j];
         options[k] = true;
       }
       return options;
@@ -369,8 +377,8 @@
   Pathfinder.Grid = Grid = (function() {
     function Grid(__grid, __width, __height) {
       this.__grid = __grid;
-      this.__width = __width;
-      this.__height = __height;
+      this.__width = __width != null ? __width : 10;
+      this.__height = __height != null ? __height : 10;
     }
 
     Grid.prototype.getHeight = function() {
