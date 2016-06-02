@@ -4,7 +4,7 @@ Utilities from the ASC engine that are made standalone on purpose. Each one is s
 All utilities support both CommonJS (e.g. Node.js) and Browser environments.
 
 ## What's with the name?
-I'm currently working on a web-based ((Electron)[http://electron.atom.io]) game. It's comprised of a few different layers on top of plain JS (although the majority is written in CoffeeScript and then transpiled to JS). One of these layers, (the parent engine) I simply call 'Asc'. However, I've found that some of the utilities could easily be made standalone, since they don't really rely on anything related to the engine. For this reason, I made them standalone on purpose, so that anyone could use them.
+I'm currently working on a web-based ([Electron](http://electron.atom.io)) game. It's comprised of a few different layers on top of plain JS (although the majority is written in CoffeeScript and then transpiled to JS). One of these layers, (the parent engine) I simply call 'Asc'. However, I've found that some of the utilities could easily be made standalone, since they don't really rely on anything related to the engine. For this reason, I made them standalone on purpose, so that anyone could use them.
 
 ## Utilities
 Here's a list of all the tools and utilities I've made explicitly public:
