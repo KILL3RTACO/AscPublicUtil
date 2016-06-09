@@ -32,7 +32,9 @@
 
     MapRenderer.RIGHT = 3;
 
-    function MapRenderer() {
+    function MapRenderer(__width, __height) {
+      this.__width = __width;
+      this.__height = __height;
       this.__borderSize = 1;
       this.__cellSize = 20;
       this.__voidColor = "#FFF";
@@ -41,9 +43,27 @@
       this.__colors = [];
     }
 
+    MapRenderer.prototype.setWidth = function(__width) {
+      this.__width = __width;
+      return this.__updateSize();
+    };
+
+    MapRenderer.prototype.getWidth = function() {
+      return this.__width;
+    };
+
+    MapRenderer.prototype.setHeight = function(__height) {
+      this.__height = __height;
+      return this.__updateSize();
+    };
+
+    MapRenderer.prototype.getHeight = function() {
+      return this.__height;
+    };
+
     MapRenderer.prototype.__updateSize = function() {
-      this.__ctx.canvas.width = this.getOffset(floor.getWidth());
-      return this.__ctx.canvas.height = this.getOffset(floor.getHeight());
+      this.__ctx.canvas.width = this.getOffset(this.getWidth());
+      this.__ctx.canvas.height = this.getOffset(this.getHeight());
     };
 
     MapRenderer.prototype.setVoidColor = function(__voidColor) {

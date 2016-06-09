@@ -23,7 +23,7 @@ class MapRenderer
   # @STRAIGHT: 0
   # @CURVED:   1
 
-  constructor: ->
+  constructor: (@__width, @__height) ->
     @__borderSize = 1
     @__cellSize = 20
     @__voidColor = "#FFF"
@@ -31,9 +31,16 @@ class MapRenderer
     @__borderColor = "#000"
     @__colors = []
 
+  setWidth: (@__width) -> @__updateSize()
+  getWidth: -> @__width
+
+  setHeight: (@__height) -> @__updateSize()
+  getHeight: -> @__height
+
   __updateSize: ->
-    @__ctx.canvas.width = @getOffset floor.getWidth()
-    @__ctx.canvas.height = @getOffset floor.getHeight()
+    @__ctx.canvas.width = @getOffset @getWidth()
+    @__ctx.canvas.height = @getOffset @getHeight()
+    return
 
   setVoidColor: (@__voidColor) -> return @
   getVoidColor: -> @__voidColor
