@@ -12,7 +12,7 @@ Here's a list of all the tools and utilities I've made explicitly public:
 * [MapRenderer](#MapRenderer)
 * [Pathfinder](#Pathfinder)
 
-# Enum
+# <a name='Enum'></a>Enum
 A simple set of classes to emulate Enums from Java.
 
 # <a name='MapRenderer'></a>MapRenderer
