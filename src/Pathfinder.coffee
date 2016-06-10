@@ -196,7 +196,7 @@ class Pathfinder
           # Set 'frontierChanged' to true because we added something to it.
           # For performance opmtimization, the array of discovered nodes is sorted only
           # AFTER all potential neighbors have been stepped through. If we were to instead sort the array
-          # immediately after it was added, we would have
+          # immediately after it was added, we would be sorting more times than needed. 
           frontierChanged = true
 
       # Only sort the list if anything was added to it, otherwise there isnt a need to
