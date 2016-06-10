@@ -3,7 +3,7 @@
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     hasProp = {}.hasOwnProperty;
 
-  module.exports = Enum = (function() {
+  Enum = (function() {
     function Enum() {
       this.__values = [];
     }
@@ -52,5 +52,11 @@
     return _Class;
 
   })(Enum.GenericEntry);
+
+  if (typeof module === "object" && typeof module.exports === "object") {
+    module.exports = Enum;
+  } else {
+    window.Enum = Enum;
+  }
 
 }).call(this);

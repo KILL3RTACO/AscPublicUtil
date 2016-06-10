@@ -1,4 +1,4 @@
-module.exports = class Enum
+class Enum
 
   constructor: ->
     @__values = []
@@ -18,3 +18,8 @@ Enum.GenericEntry = class
 Enum.GenericIdEntry = class extends Enum.GenericEntry
   constructor: (@__id, @__name) ->
   getId: -> @__id
+
+if typeof module is "object" and typeof module.exports is "object"
+  module.exports = Enum
+else
+  window.Enum = Enum
