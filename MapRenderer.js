@@ -1,5 +1,9 @@
 (function() {
-  var MapRenderer;
+  var MapRenderer, clamp;
+
+  clamp = function(min, n, max) {
+    return Math.min(Math.max(n, min), max);
+  };
 
   MapRenderer = (function() {
     MapRenderer.SQUARE = 0;
@@ -278,9 +282,12 @@
     };
 
     MapRenderer.prototype.getCellLocation = function(pixelX, pixelY) {
+      var x, y;
+      x = Math.floor(pixelX / (this.__cellSize + this.__borderSize));
+      y = Math.floor(pixelY / (this.__cellSize + this.__borderSize));
       return {
-        x: Math.floor(pixelX / (this.__cellSize + this.__borderSize)),
-        y: Math.floor(pixelY / (this.__cellSize + this.__borderSize))
+        x: clamp(0, x, this.__width - 1),
+        y: clamp(0, y, this.__height - 1)
       };
     };
 
