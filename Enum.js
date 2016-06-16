@@ -25,31 +25,31 @@
   })();
 
   Enum.GenericEntry = (function() {
-    function _Class(__name) {
+    function GenericEntry(__name) {
       this.__name = __name;
     }
 
-    _Class.prototype.getName = function() {
+    GenericEntry.prototype.getName = function() {
       return this.__name;
     };
 
-    return _Class;
+    return GenericEntry;
 
   })();
 
   Enum.GenericIdEntry = (function(superClass) {
-    extend(_Class, superClass);
+    extend(GenericIdEntry, superClass);
 
-    function _Class(__id, __name) {
+    function GenericIdEntry(__id, __name) {
       this.__id = __id;
       this.__name = __name;
     }
 
-    _Class.prototype.getId = function() {
+    GenericIdEntry.prototype.getId = function() {
       return this.__id;
     };
 
-    return _Class;
+    return GenericIdEntry;
 
   })(Enum.GenericEntry);
 
